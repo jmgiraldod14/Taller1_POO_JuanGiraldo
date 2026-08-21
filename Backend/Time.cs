@@ -17,44 +17,44 @@ public class Time
     //Constructors
     public Time()
     {
-        _hour = 0;
-        _minute = 0;
-        _second = 0;
-        _millisecond = 0;
+        Hour = 0;
+        Minute = 0;
+        Second = 0;
+        Millisecond = 0;
         
     }
 
     public Time(int hour)
     {
-        _hour = hour;
-        _minute = 0;
-        _second = 0;
-        _millisecond = 0;
+        Hour = hour;
+        Minute = 0;
+        Second = 0;
+        Millisecond = 0;
       
     }
 
     public Time(int hour, int minute)
     {
-        _hour = hour;
-        _minute = minute;
-        _second = 0;
-        _millisecond = 0;
+        Hour = hour;
+        Minute = minute;
+        Second = 0;
+        Millisecond = 0;
     }
 
     public Time(int hour, int minute, int second)
     {
-        _hour = hour;
-        _minute = minute;
-        _second = second;
-        _millisecond = 0;
+        Hour = hour;
+        Minute = minute;
+        Second = second;
+        Millisecond = 0;
     }
 
     public Time(int hour, int minute, int second, int millisecond)
     {
-        _hour= hour;
-        _minute = minute;
-        _second = second;
-        _millisecond =millisecond;
+        Hour= hour;
+        Minute = minute;
+        Second = second;
+        Millisecond =millisecond;
     }
 
     //Properties
@@ -62,38 +62,36 @@ public class Time
     public int Hour 
     {
         get => _hour; 
-        set => _hour = value; 
+        set => _hour = ValidateHour(value); 
     }
 
     public int Minute 
     {
         get => _minute;
-        set => _minute = value;
+        set => _minute = ValidateMinute(value);
     }
 
     public int Second 
     {
         get => _second;
-        set => _second = value;
+        set => _second = ValidateSecond(value);
     }
 
     public int Millisecond 
     {
         get => _millisecond;
-        set => _millisecond = value;
+        set => _millisecond = ValidateMillisecond(value);
     }
-
-
-
-
+ 
+    
     //Public Methods
 
     public override string ToString()
     {
         string period;
-        int T_hour = _hour;
+        int T_hour = Hour;
 
-        if (_hour < 12)
+        if (Hour < 12)
         {
             period = "AM"; 
         }
@@ -110,7 +108,50 @@ public class Time
         {
             T_hour = T_hour - 12;
         }
-        return $"{T_hour:D2}:{_minute:D2}:{_second:D2}.{_millisecond:D3} {period}";
+        return $"{T_hour:D2}:{Minute:D2}:{Second:D2}.{Millisecond:D3} {period}";
+    }
+
+
+    //Private Methods
+
+    private int ValidateHour(int hour)
+    {
+        if (hour < 0 || hour > 23)
+        {
+
+            throw new Exception($"The hour: {hour}, is not valid.");
+        }
+        return hour;
+    }
+
+    private int ValidateMinute(int minute)
+    {
+        if (minute < 0 || minute >59)
+        {
+
+            throw new Exception($"The minute: {minute}, is not valid.");
+        }
+        return minute;
+    }
+
+    private int ValidateSecond(int second)
+    {
+        if (second < 0 || second > 59)
+        {
+
+            throw new Exception($"The second: {second}, is not valid.");
+        }
+        return second;
+    }
+
+    private int ValidateMillisecond(int millisecond)
+    {
+        if (millisecond < 0 || millisecond > 999)
+        {
+
+            throw new Exception($"The millisecond: {millisecond}, is not valid.");
+        }
+        return millisecond;
     }
 
 }
