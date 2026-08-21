@@ -1,16 +1,29 @@
 ﻿using Backend;
+using System.Timers;
 
 try
 {
-    var time1 = new Time(); //tiempo cero
-    var time2 = new Time(15); //horas
-    var time3 = new Time(8, 58, 54, 1000);
-    var time4 = new Time(23, 2, 7);
+    var t1 = new Time(); //tiempo cero
+    var t2 = new Time(14); //horas
+    var t3 = new Time(9, 34);
+    var t4 = new Time(19, 45, 56);
+    var t5 = new Time(23, 3, 45, 678);
 
-    Console.WriteLine(time1.ToString());
-    Console.WriteLine(time2.ToString());
-    Console.WriteLine(time3.ToString());
-    Console.WriteLine(time4.ToString());
+    var times = new List<Time> { t1, t2, t3, t4, t5 };
+
+    foreach (Time time in times)
+    {
+        Console.WriteLine($"Time: {time}");
+        Console.WriteLine($"\tMilliseconds: {time.ToMilliseconds(),15:N0}");
+        Console.WriteLine($"\tSeconds     : {time.ToSeconds(),15:N0}");
+        Console.WriteLine($"\tMinutes     : {time.ToMinutes(),15:N0}");
+        Console.WriteLine($"\tAdd         : {time.Add(t3),15:N0}");
+        Console.WriteLine($"\tIs Other day: {time.IsOtherDay(t4)}");
+        Console.WriteLine();
+    }
+
+    var t6 = new Time(45, -7, 90, -87);
+
 }
 catch (Exception ex)
 {
