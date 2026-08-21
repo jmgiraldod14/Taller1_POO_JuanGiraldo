@@ -59,6 +59,31 @@ public class Time
 
     //Properties
 
+    public int Hour 
+    {
+        get => _hour; 
+        set => _hour = value; 
+    }
+
+    public int Minute 
+    {
+        get => _minute;
+        set => _minute = value;
+    }
+
+    public int Second 
+    {
+        get => _second;
+        set => _second = value;
+    }
+
+    public int Millisecond 
+    {
+        get => _millisecond;
+        set => _millisecond = value;
+    }
+
+
 
 
     //Public Methods
@@ -66,6 +91,7 @@ public class Time
     public override string ToString()
     {
         string period;
+        int T_hour = _hour;
 
         if (_hour < 12)
         {
@@ -75,10 +101,16 @@ public class Time
         {
             period = "PM";
         }
-        return $"{_hour:D2}:{_minute:D2}:{_second:D2}.{_millisecond:D3} {period}";
+
+        if (T_hour == 0) 
+        {
+            T_hour = 12;
+        }
+        else if (T_hour > 12)
+        {
+            T_hour = T_hour - 12;
+        }
+        return $"{T_hour:D2}:{_minute:D2}:{_second:D2}.{_millisecond:D3} {period}";
     }
-
-
-
 
 }
