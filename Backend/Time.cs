@@ -12,7 +12,7 @@ public class Time
     private int _minute;
     private int _second;
     private int _millisecond;
-   
+
 
 
     //Constructors
@@ -22,7 +22,7 @@ public class Time
         Minute = 0;
         Second = 0;
         Millisecond = 0;
-        
+
     }
 
     public Time(int hour)
@@ -31,7 +31,7 @@ public class Time
         Minute = 0;
         Second = 0;
         Millisecond = 0;
-      
+
     }
 
     public Time(int hour, int minute)
@@ -52,39 +52,39 @@ public class Time
 
     public Time(int hour, int minute, int second, int millisecond)
     {
-        Hour= hour;
+        Hour = hour;
         Minute = minute;
         Second = second;
-        Millisecond =millisecond;
+        Millisecond = millisecond;
     }
 
     //Properties
 
-    public int Hour 
+    public int Hour
     {
-        get => _hour; 
-        set => _hour = ValidateHour(value); 
+        get => _hour;
+        set => _hour = ValidateHour(value);
     }
 
-    public int Minute 
+    public int Minute
     {
         get => _minute;
         set => _minute = ValidateMinute(value);
     }
 
-    public int Second 
+    public int Second
     {
         get => _second;
         set => _second = ValidateSecond(value);
     }
 
-    public int Millisecond 
+    public int Millisecond
     {
         get => _millisecond;
         set => _millisecond = ValidateMillisecond(value);
     }
- 
-    
+
+
     //Public Methods
 
     public override string ToString()
@@ -94,14 +94,14 @@ public class Time
 
         if (Hour < 12)
         {
-            period = "AM"; 
+            period = "AM";
         }
         else
         {
             period = "PM";
         }
 
-        if (T_hour == 0) 
+        if (T_hour == 0)
         {
             T_hour = 12;
         }
@@ -112,17 +112,17 @@ public class Time
         return $"{T_hour:D2}:{Minute:D2}:{Second:D2}.{Millisecond:D3} {period}";
     }
 
-    public int ToMilliseconds() 
+    public int ToMilliseconds()
     {
         int T_milliseconds;
-        T_milliseconds = Hour*3600000 + Minute*60000 + Second*1000 + Millisecond;
+        T_milliseconds = Hour * 3600000 + Minute * 60000 + Second * 1000 + Millisecond;
         return T_milliseconds;
     }
 
     public int ToSeconds()
     {
         int T_seconds;
-        T_seconds = Hour*3600 + Minute*60 + Second;
+        T_seconds = Hour * 3600 + Minute * 60 + Second;
         return T_seconds;
     }
 
@@ -140,25 +140,25 @@ public class Time
         int add_minutes = Minute + previous.Minute;
         int add_hours = Hour + previous.Hour;
 
-        if (add_milliseconds >= 1000)
+        while (add_milliseconds >= 1000)
         {
             add_milliseconds = add_milliseconds - 1000;
             add_seconds = add_seconds + 1;
         }
 
-        if (add_seconds >= 60)
+        while (add_seconds >= 60)
         {
             add_seconds = add_seconds - 60;
             add_minutes = add_minutes + 1;
         }
 
-        if (add_minutes >= 60)
+        while (add_minutes >= 60)
         {
             add_minutes = add_minutes - 60;
             add_hours = add_hours + 1;
         }
 
-        if (add_hours >= 24)
+        while (add_hours >= 24)
         {
             add_hours = add_hours - 24;
         }
@@ -175,18 +175,21 @@ public class Time
         int add_hours = Hour + another.Hour;
         bool condition = false;
 
-        if (add_milliseconds >= 1000)
+        while (add_milliseconds >= 1000)
         {
+            add_milliseconds = add_milliseconds - 1000;
             add_seconds = add_seconds + 1;
         }
 
-        if (add_seconds >= 60)
+        while (add_seconds >= 60)
         {
+            add_seconds = add_seconds - 60;
             add_minutes = add_minutes + 1;
         }
 
-        if (add_minutes >= 60)
+        while (add_minutes >= 60)
         {
+            add_minutes = add_minutes - 60;
             add_hours = add_hours + 1;
         }
 
@@ -212,7 +215,7 @@ public class Time
 
     private int ValidateMinute(int minute)
     {
-        if (minute < 0 || minute >59)
+        if (minute < 0 || minute > 59)
         {
 
             throw new Exception($"The minute: {minute}, is not valid.");
